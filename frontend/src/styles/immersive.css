@@ -1,0 +1,1245 @@
+/* Cantina: a single, four-sided decanter. Preserve 3D only on geometric parents;
+   scrolling and clipped label content live inside each individual flat face. */
+.immersive-shell .site-footer {
+  display: none;
+}
+.immersive-shell .site-header {
+  margin-bottom: 0;
+}
+.cantina-experience {
+  --bottle-width: 368px;
+  --shoulder-depth: 116px;
+  --shoulder-angle: 61deg;
+  --bottle-depth: 184px;
+  --bottle-height: 782px;
+  --body-start: 202px;
+  --body-height: 580px;
+  --camera-scale: 0.82;
+  position: relative;
+  background: #080808;
+}
+.bottle-theatre {
+  min-height: 860px;
+  height: calc(100svh - 96px);
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 50% 26%, #2f141d45, transparent 49%),
+    linear-gradient(#090808, #100b0c 67%, #080708);
+}
+.cellar-architecture {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  opacity: 0.48;
+  pointer-events: none;
+}
+.cellar-architecture:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent calc(25% - 1px),
+      #ad927410 25%
+    ),
+    linear-gradient(transparent 78%, #aa8c6415 78%, transparent calc(78% + 1px));
+}
+.cellar-architecture:after {
+  content: "";
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  height: 370px;
+  bottom: -270px;
+  border: 1px solid #b1946a33;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 70px #a6866405,
+    0 0 0 140px #a6866404;
+  transform: rotateX(50deg);
+}
+.cellar-architecture i {
+  position: absolute;
+  top: 6%;
+  bottom: 18%;
+  width: 18%;
+  border: 1px solid #a4907217;
+  border-radius: 200px 200px 0 0;
+}
+.cellar-architecture i:nth-child(1) {
+  left: -8%;
+}
+.cellar-architecture i:nth-child(2) {
+  left: 14%;
+}
+.cellar-architecture i:nth-child(3) {
+  right: 14%;
+}
+.cellar-architecture i:nth-child(4) {
+  right: -8%;
+}
+.bottle-spotlight {
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  width: 480px;
+  height: 780px;
+  transform: translateX(-50%);
+  z-index: -2;
+  opacity: 0.55;
+  pointer-events: none;
+  background: conic-gradient(
+    from 164deg at 50% 0%,
+    transparent 0deg,
+    #d8b98210 10deg,
+    #eed6a71c 16deg,
+    #d8b98210 22deg,
+    transparent 32deg
+  );
+  mask-image: linear-gradient(#000 20%, transparent 97%);
+}
+.bottle-aura {
+  position: absolute;
+  left: 50%;
+  top: 12%;
+  width: 740px;
+  height: 660px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, #7707273b, transparent 66%);
+  pointer-events: none;
+  z-index: -2;
+  transition: opacity 1s;
+}
+.is-brewing .bottle-aura {
+  animation: cantina-breathe 3s ease-in-out infinite;
+  background: radial-gradient(ellipse, #b912454e, transparent 65%);
+}
+.bottle-camera {
+  position: relative;
+  width: var(--bottle-width);
+  height: var(--bottle-height);
+  transform: scale(var(--camera-scale));
+  transform-origin: center 53%;
+  transition: transform 1.2s cubic-bezier(0.22, 0.7, 0.15, 1);
+  margin-bottom: 55px;
+}
+.camera-close {
+  --camera-scale: 0.89;
+}
+.bottle-perspective {
+  pointer-events: none;
+  perspective: 1500px;
+  perspective-origin: 50% 47%;
+  width: 100%;
+  height: 100%;
+}
+.bottle-object {
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+.bottle-side {
+  pointer-events: none;
+  position: absolute;
+  top: var(--body-start);
+  width: var(--bottle-width);
+  height: var(--body-height);
+  transform: rotateY(calc(var(--face) * 90deg)) translateZ(var(--bottle-depth));
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 12px 12px 26px 26px;
+  overflow: hidden;
+  border: 1px solid #9f9c7549;
+  background: linear-gradient(
+    90deg,
+    #070c08 0%,
+    #47513a 1%,
+    #172b1d 3%,
+    #172018 6%,
+    #08120c 13%,
+    #070e09 52%,
+    #0e1b11 87%,
+    #283a28 97%,
+    #87917168 99%,
+    #0b130d
+  );
+  box-shadow:
+    inset 12px 0 20px #a2a17810,
+    inset -10px 0 15px #c8b5990c;
+}
+.bottle-side[aria-hidden="false"] {
+  pointer-events: auto;
+}
+.is-turning .bottle-side {
+  pointer-events: none;
+}
+.bottle-side:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 -20px 13px #0009;
+}
+.bottle-neck-plane {
+  width: 96px;
+  height: 127px;
+  position: absolute;
+  left: calc(50% - 48px);
+  top: 0;
+  transform: rotateY(calc(var(--face) * 90deg)) translateZ(48px);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border: 1px solid #835b4250;
+  border-top: 3px solid #be9f6980;
+  border-radius: 7px 7px 0 0;
+  background: linear-gradient(
+    90deg,
+    #1c0d10,
+    #692334 9%,
+    #35131e 35%,
+    #290b16 80%,
+    #6a263180 95%,
+    #1b0e11
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.bottle-neck-plane:before,
+.bottle-neck-plane:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-block: 1px solid #b0896d45;
+  top: 12px;
+}
+.bottle-neck-plane:after {
+  top: auto;
+  bottom: 15px;
+}
+.bottle-neck-plane > span {
+  font:
+    italic 42px Georgia,
+    serif;
+  color: #cca873b5;
+}
+.bottle-neck-plane > i {
+  width: 12px;
+  height: 1px;
+  background: #b18b5f;
+  margin-top: 8px;
+}
+.bottle-shoulder-plane {
+  width: var(--bottle-width);
+  height: 155px;
+  position: absolute;
+  top: 87px;
+  left: 0;
+  transform: rotateY(calc(var(--face) * 90deg)) translateZ(116px) rotateX(61deg);
+  clip-path: polygon(37% 0, 63% 0, 100% 100%, 0 100%);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: linear-gradient(
+    90deg,
+    #0b110b,
+    #263e2a 7%,
+    #0e1b11 25%,
+    #0b150e 72%,
+    #3d5034 99%
+  );
+}
+.bottle-base {
+  position: absolute;
+  width: var(--bottle-width);
+  height: var(--bottle-width);
+  top: calc(var(--bottle-height) - var(--bottle-depth));
+  transform: rotateX(-90deg);
+  background: #0b110b;
+  border-radius: 24px;
+  backface-visibility: hidden;
+}
+.glass-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    92deg,
+    transparent,
+    transparent 23px,
+    #b9b78805 24px,
+    transparent 25px
+  );
+}
+.bottle-engraving {
+  text-align: center;
+  font: 6px monospace;
+  letter-spacing: 3px;
+  color: #b7b18b75;
+  position: absolute;
+  top: 14px;
+  left: 0;
+  right: 0;
+}
+.bottle-heel {
+  position: absolute;
+  bottom: 16px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: 6px monospace;
+  letter-spacing: 2px;
+  color: #b8ae8390;
+}
+.bottle-heel i {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #b8ae832b;
+  border-radius: 50%;
+}
+.bottle-fluid {
+  position: absolute;
+  inset: 16px 8px 16px;
+  opacity: 0.28;
+  pointer-events: none;
+  border-radius: 14px;
+  background: linear-gradient(transparent 12%, #7c092529 40%, #780b3066);
+  transition: opacity 1s;
+}
+.is-brewing .bottle-fluid {
+  opacity: 1;
+  box-shadow: inset 0 0 55px #e6003a40;
+}
+.bottle-fluid i {
+  position: absolute;
+  bottom: 10%;
+  left: calc(5% + var(--n) * 6.8%);
+  width: 4px;
+  height: 4px;
+  background: #ec456c;
+  border: 1px solid #ef9a9277;
+  border-radius: 50%;
+  opacity: 0;
+}
+.is-brewing .bottle-fluid i {
+  animation: cantina-bubble 2.8s calc(var(--n) * -0.27s) ease-in infinite;
+}
+.bottle-plinth {
+  position: absolute;
+  width: 590px;
+  height: 130px;
+  top: calc(50% + var(--camera-scale) * 400px - 30px);
+  left: calc(50% - 295px);
+  z-index: -1;
+  pointer-events: none;
+}
+.bottle-plinth > div {
+  position: absolute;
+  inset: 12px 0 24px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #302428 0%, #1f171a 40%, #080608 70%);
+  border: 1px solid #ba9a6747;
+  box-shadow:
+    0 9px 0 #110e11,
+    0 11px 0 #6b51402e,
+    0 24px 25px #000;
+}
+.bottle-plinth > i {
+  position: absolute;
+  inset: 42px 50px 53px;
+  border: 1px solid #b58b6e24;
+  border-radius: 50%;
+}
+.bottle-plinth > b {
+  position: absolute;
+  inset: 1px 106px 21px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #7b052d24, transparent 70%);
+}
+.bottle-plinth > span {
+  position: absolute;
+  bottom: 9px;
+  left: calc(43% + var(--n) * 4%);
+  width: 10px;
+  height: 2px;
+  background: #605045;
+}
+.bottle-plinth > span.active {
+  background: #d7b383;
+  box-shadow: 0 0 10px #d7b38388;
+}
+.stage-dust {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+.stage-dust i {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #c6a56e;
+  left: calc(8% + var(--n) * 7.7%);
+  top: calc(20% + var(--n) * 5%);
+  opacity: 0.12;
+  animation: cantina-dust 14s calc(var(--n) * -1.7s) ease-in-out infinite;
+}
+.camera-close .stage-dust i {
+  animation-play-state: paused;
+}
+.bottle-swipe-edge {
+  position: absolute;
+  top: calc(50% - 225px);
+  width: 25px;
+  height: 410px;
+  touch-action: pan-y;
+  cursor: grab;
+  z-index: 5;
+}
+.bottle-swipe-edge:active {
+  cursor: grabbing;
+}
+.edge-left {
+  right: calc(50% + 165px);
+}
+.edge-right {
+  left: calc(50% + 165px);
+}
+.camera-close .edge-left {
+  right: calc(50% + 183px);
+}
+.camera-close .edge-right {
+  left: calc(50% + 183px);
+}
+.is-turning .bottle-swipe-edge,
+.is-brewing .bottle-swipe-edge {
+  pointer-events: none;
+}
+/* Label stock: a warm, lightly textured paper contrasted with bottle glass. */
+.cantina-label {
+  --label-ink: #372125;
+  --label-muted: #78665a;
+  --label-line: #64433135;
+  position: absolute;
+  inset: 36px 23px 42px;
+  display: flex;
+  flex-direction: column;
+  color: var(--label-ink);
+  border: 1px solid #dccaa0;
+  border-radius: 1px;
+  background:
+    radial-gradient(ellipse at top left, #f0e5cddd, transparent 80%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 2px,
+      #65493204 3px
+    ),
+    #daceb1;
+  box-shadow:
+    0 4px 16px #0006,
+    inset 0 0 30px #93714625;
+}
+.cantina-label:before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--label-line);
+  pointer-events: none;
+}
+.label-masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 21px 12px;
+  flex-shrink: 0;
+  position: relative;
+}
+.label-masthead > span:first-child {
+  font:
+    9px Georgia,
+    serif;
+  letter-spacing: 3px;
+}
+.label-masthead > span:last-child {
+  font: 6px monospace;
+  letter-spacing: 1px;
+  color: var(--label-muted);
+}
+.label-content {
+  flex: 1;
+  min-height: 0;
+  padding: 0 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #9d7d5760 transparent;
+  overscroll-behavior: contain;
+  position: relative;
+}
+.label-content::-webkit-scrollbar {
+  width: 3px;
+}
+.label-content::-webkit-scrollbar-thumb {
+  background: #9d7d5780;
+}
+.label-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 19px 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--label-line);
+  position: relative;
+  flex-shrink: 0;
+}
+.label-navigation button {
+  border: 1px solid var(--label-line);
+  background: transparent;
+  width: 32px;
+  height: 29px;
+  display: grid;
+  place-items: center;
+  color: #754543;
+  transition: background 0.2s;
+}
+.label-navigation button:hover {
+  background: #78273815;
+}
+.label-navigation > div {
+  text-align: center;
+}
+.label-navigation > div > span {
+  font: 7px monospace;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.label-face-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 7px;
+}
+.label-face-dots i {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #977b5860;
+}
+.label-face-dots i.current {
+  background: #7c1233;
+}
+.cantina-label button:focus-visible,
+.cantina-label a:focus-visible,
+.cantina-label input:focus-visible,
+.cantina-label select:focus-visible,
+.cantina-label summary:focus-visible {
+  outline: 2px solid #9b2850;
+  outline-offset: 2px;
+}
+.label-eyebrow {
+  display: block;
+  font: 6px/1.6 monospace;
+  letter-spacing: 1.2px;
+  color: #8c4d52;
+}
+.cantina-label h2 {
+  font:
+    31px/1.06 Georgia,
+    serif;
+  letter-spacing: -0.8px;
+  margin: 10px 0 13px;
+}
+.cantina-label em {
+  color: #8b4d4d;
+}
+.cantina-label p {
+  font:
+    10px/1.65 Arial,
+    sans-serif;
+  color: var(--label-muted);
+}
+.label-action {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #793749;
+  background: #63162c;
+  padding: 12px 13px;
+  color: #f1e5d0;
+  font-size: 9px;
+  letter-spacing: 0.2px;
+  transition: background 0.2s;
+}
+.label-action:hover {
+  background: #891f40;
+}
+.label-hint {
+  display: block;
+  font: 5.5px/1.5 monospace;
+  color: var(--label-muted);
+  letter-spacing: 0.35px;
+  text-align: center;
+  margin-top: 10px;
+}
+.label-subtle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  background: none;
+  border: 0;
+  font-size: 8px;
+  padding: 10px 0;
+  color: #733749;
+}
+.estate-label {
+  text-align: center;
+  padding-top: 9px;
+}
+.estate-crest {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 17px;
+  color: #854749;
+  margin: 9px 0 9px;
+}
+.estate-crest > span {
+  width: 27px;
+  height: 1px;
+  background: #a8865960;
+}
+.estate-label h1 {
+  font:
+    53px/1 Georgia,
+    serif;
+  letter-spacing: -2px;
+}
+.estate-label h1 > span {
+  display: block;
+  font:
+    21px/1.25 Georgia,
+    serif;
+  letter-spacing: -0.4px;
+  margin-top: 15px;
+}
+.estate-label p {
+  margin: 12px auto;
+  font-size: 10px;
+}
+.estate-vintage {
+  border-top: 1px solid var(--label-line);
+  padding-top: 12px;
+  margin: 0 14px 17px;
+}
+.estate-vintage > span {
+  display: block;
+  font: 6px monospace;
+  letter-spacing: 1.2px;
+  color: #896852;
+}
+.estate-vintage > strong {
+  display: block;
+  font:
+    italic 16px Georgia,
+    serif;
+  margin-top: 7px;
+}
+.label-phase {
+  min-height: 100%;
+}
+.composition-label h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.label-presets {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 10px;
+}
+.label-presets > label {
+  font-size: 7px;
+  flex: 1;
+  color: var(--label-muted);
+}
+.label-presets select {
+  min-width: 0;
+  width: 111px;
+  padding: 5px 4px;
+  background: #e4d7b9;
+  border: 1px solid var(--label-line);
+  color: #563137;
+  font-size: 7px;
+  color-scheme: light;
+}
+.label-presets button {
+  padding: 4px;
+  background: none;
+  border: 0;
+  color: #8e5557;
+}
+.label-groups {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--label-line);
+  margin-bottom: 9px;
+}
+.label-groups button {
+  padding: 8px 3px;
+  font-size: 7px;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--label-muted);
+}
+.label-groups button > span {
+  font: 6px monospace;
+  margin-right: 4px;
+  color: #9e7870;
+}
+.label-groups button[aria-pressed="true"] {
+  border-bottom-color: #8d2949;
+  background: #7d153211;
+  color: #5d2032;
+}
+.bottle-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 12px;
+}
+.bottle-controls .chemical-control {
+  padding: 10px 9px 7px;
+  background: #9d795e0b;
+  border: 1px solid #96775a35;
+  box-shadow: none;
+}
+.bottle-controls .control-heading {
+  display: none;
+}
+.bottle-controls .compound-symbol {
+  font-size: 11px;
+  color: #7e3a4a;
+}
+.bottle-controls .control-index {
+  display: none;
+}
+.bottle-controls .control-label {
+  font-size: 8px;
+  margin-bottom: 5px;
+  color: #553e37;
+  white-space: nowrap;
+  letter-spacing: -0.2px;
+}
+.bottle-controls .control-reading {
+  gap: 3px;
+}
+.bottle-controls .control-reading input {
+  color: #442c2c;
+  font-size: 23px;
+  width: 72px;
+}
+.bottle-controls .control-reading span {
+  color: #896958;
+  font-size: 6px;
+}
+.bottle-controls .range-instrument {
+  height: 23px;
+  margin-top: 2px;
+}
+.bottle-controls .range-instrument input {
+  height: 23px;
+}
+.bottle-controls .range-track {
+  top: 12px;
+  background: #8a624e36;
+}
+.bottle-controls .range-fill {
+  background: #8e2344;
+  box-shadow: none;
+}
+.bottle-controls .range-thumb {
+  background: #813047;
+  box-shadow: 0 0 5px #a2345266;
+}
+.bottle-controls .range-scale {
+  font-size: 5px;
+  color: #896758;
+}
+.bottle-controls .scale-ticks {
+  display: none;
+}
+.bottle-controls .range-scale button {
+  padding: 3px;
+  border-color: #82644140;
+  color: #713547;
+}
+.bottle-controls .range-scale button > svg {
+  width: 9px;
+  height: 9px;
+}
+.bottle-controls .control-active {
+  background: #8017320d;
+  border-color: #984e6380;
+}
+.composition-label .label-action {
+  margin-top: 4px;
+}
+.composition-label .label-hint {
+  margin-top: 7px;
+  font-size: 5px;
+}
+.brewing-label {
+  padding-top: 8px;
+  text-align: center;
+}
+.brew-symbol {
+  position: relative;
+  height: 110px;
+  display: grid;
+  place-items: center;
+  color: #802c43;
+  margin: 9px 0;
+}
+.brew-symbol i {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 1px solid #91445544;
+  border-top-color: #82324e;
+  border-radius: 50%;
+  animation: cantina-orbit 8s linear infinite;
+}
+.brew-symbol i:last-child {
+  width: 83px;
+  height: 83px;
+  border-style: dashed;
+  animation-direction: reverse;
+}
+.brewing-label h2 {
+  margin-top: 15px;
+}
+.brewing-label p {
+  font-size: 10px;
+}
+.bottle-progress {
+  height: 2px;
+  background: #8d536144;
+  margin: 20px 15px;
+}
+.bottle-progress i {
+  height: 100%;
+  display: block;
+  background: #aa2d4e;
+  box-shadow: 0 0 8px #c2194a66;
+  transform-origin: left;
+}
+.brewing-label ol {
+  padding: 0 10px;
+  margin: 15px 0 7px;
+  list-style: none;
+  text-align: left;
+}
+.brewing-label li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 7px/1.5 monospace;
+  margin: 10px 0;
+  color: #aa8e7a;
+}
+.brewing-label li.active {
+  color: #692437;
+}
+.brewing-label li > span {
+  width: 17px;
+  display: inline-flex;
+}
+.label-error,
+.empty-bottle-label {
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+.label-error > svg {
+  color: #8e3851;
+}
+.label-error p {
+  font-size: 10px;
+}
+.vintage-label {
+  text-align: center;
+  padding-top: 5px;
+}
+.vintage-label h2 {
+  font-size: 28px;
+  margin: 9px 0 0;
+}
+.vintage-label .quality-dial {
+  width: 172px;
+  margin: 4px auto 5px;
+}
+.vintage-label .quality-dial .eyebrow {
+  color: #7d4953;
+  font-size: 5px;
+  letter-spacing: 1px;
+}
+.vintage-label .dial-value strong {
+  color: #45262e;
+  font-size: 63px;
+  letter-spacing: -3px;
+}
+.vintage-label .dial-value small {
+  color: #89695c;
+  font-size: 4px;
+  letter-spacing: 0.5px;
+}
+.vintage-label .quality-dial svg {
+  filter: none;
+}
+.vintage-label .quality-dial svg circle:nth-child(1) {
+  stroke: #8d644846;
+}
+.vintage-label .quality-dial svg circle:nth-child(2) {
+  stroke: #8e735738;
+}
+.vintage-label .quality-dial svg circle:nth-child(3) {
+  stroke: #942247;
+}
+.vintage-label .quality-dial svg circle:nth-child(4) {
+  stroke: #8d644828;
+}
+.vintage-seal {
+  font: 6px monospace;
+  letter-spacing: 1px;
+  color: #783149;
+  display: block;
+}
+.cantina-label .rating-disclosure {
+  font-size: 8px;
+  margin: 10px 0 14px;
+}
+.label-details {
+  border-top: 1px solid var(--label-line);
+  border-bottom: 1px solid var(--label-line);
+  text-align: left;
+}
+.label-details summary {
+  cursor: pointer;
+  font-size: 8px;
+  padding: 12px 0;
+  color: #633c3b;
+}
+.label-detail-content {
+  padding: 0 0 13px;
+}
+.label-detail-content p {
+  font-size: 8px;
+  margin-bottom: 10px;
+}
+.bottle-probability {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 9px 0;
+  font: 7px monospace;
+  color: #6a4946;
+}
+.bottle-probability > i {
+  height: 3px;
+  flex: 1;
+  background: #8c6c5122;
+}
+.bottle-probability b {
+  display: block;
+  height: 100%;
+  background: #8f294d;
+}
+.bottle-probability strong {
+  width: 36px;
+  text-align: right;
+  font-size: 7px;
+  font-weight: 400;
+}
+.bottle-export {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 8px;
+  color: #782e42;
+  margin-top: 6px;
+}
+.vintage-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 5px;
+}
+.vintage-actions .label-subtle {
+  font-size: 7px;
+}
+.intelligence-label {
+  padding-top: 6px;
+}
+.intelligence-label h2 {
+  font-size: 29px;
+}
+.bottle-data-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  border-block: 1px solid var(--label-line);
+  padding: 14px 0;
+  margin: 18px 0 12px;
+}
+.bottle-data-pair strong {
+  display: block;
+  font:
+    29px Georgia,
+    serif;
+  color: #673843;
+}
+.bottle-data-pair span {
+  display: block;
+  font: 6px monospace;
+  letter-spacing: 1px;
+  color: #8a6b5a;
+  margin-top: 6px;
+}
+.bottle-data-pair > div + div {
+  padding-left: 15px;
+  border-left: 1px solid var(--label-line);
+}
+.bottle-association {
+  border-top: 1px solid var(--label-line);
+  margin: 15px 0;
+  padding: 13px 0 0;
+}
+.bottle-association label {
+  display: block;
+  font-size: 8px;
+  margin-bottom: 7px;
+  color: #7c6151;
+}
+.bottle-association select {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid var(--label-line);
+  background: transparent;
+  color: #613845;
+  font-size: 9px;
+  text-transform: capitalize;
+  color-scheme: light;
+}
+.bottle-association > div {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin: 12px 0 4px;
+}
+.bottle-association strong {
+  font:
+    34px Georgia,
+    serif;
+  color: #783c49;
+}
+.bottle-association span {
+  font: 6px/1.7 monospace;
+  letter-spacing: 1px;
+  color: #936f5f;
+}
+.bottle-association p {
+  font-size: 8px;
+}
+.label-detail-content dl {
+  font-size: 9px;
+  color: #64363d;
+  margin: 10px 0;
+}
+.label-detail-content dl > div {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+.label-detail-content dd {
+  margin: 0;
+}
+.back-to-estate {
+  font-size: 7px;
+  margin-top: 8px;
+}
+@keyframes cantina-bubble {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  95% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-470px) scale(1.4);
+    opacity: 0;
+  }
+}
+@keyframes cantina-breathe {
+  50% {
+    opacity: 0.45;
+    transform: translateX(-50%) scale(0.93);
+  }
+}
+@keyframes cantina-dust {
+  50% {
+    transform: translate(15px, -24px);
+    opacity: 0.4;
+  }
+}
+@keyframes cantina-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 700px) {
+  .cantina-experience {
+    --bottle-width: 320px;
+    --shoulder-depth: 104px;
+    --shoulder-angle: 58.7deg;
+    --bottle-depth: 160px;
+    --bottle-height: 775px;
+    --body-start: 195px;
+    --body-height: 580px;
+    --camera-scale: 0.82;
+  }
+  .bottle-theatre {
+    height: calc(100svh - 80px);
+    min-height: 860px;
+  }
+  .camera-close {
+    --camera-scale: 0.89;
+  }
+  .bottle-camera {
+    margin-bottom: 35px;
+  }
+  .bottle-shoulder-plane {
+    height: 131px;
+    top: 95.5px;
+    transform: rotateY(calc(var(--face) * 90deg)) translateZ(104px)
+      rotateX(58.7deg);
+  }
+  .cantina-label {
+    left: 16px;
+    right: 16px;
+  }
+  .label-content {
+    padding-inline: 15px;
+  }
+  .label-masthead {
+    padding-inline: 16px;
+  }
+  .label-navigation {
+    margin-inline: 14px;
+  }
+  .bottle-plinth {
+    width: 430px;
+    left: calc(50% - 215px);
+    top: calc(50% + var(--camera-scale) * 400px - 30px);
+  }
+  .edge-left {
+    right: calc(50% + 139px);
+  }
+  .edge-right {
+    left: calc(50% + 139px);
+  }
+  .camera-close .edge-left {
+    right: calc(50% + 147px);
+  }
+  .camera-close .edge-right {
+    left: calc(50% + 147px);
+  }
+  .bottle-swipe-edge {
+    width: 20px;
+  }
+  .bottle-controls .control-label {
+    font-size: 7px;
+  }
+  .bottle-controls .control-reading input {
+    width: 65px;
+    font-size: 21px;
+  }
+  .bottle-controls .control-reading span {
+    font-size: 5px;
+  }
+  .label-eyebrow {
+    font-size: 5.5px;
+  }
+  .bottle-controls .chemical-control {
+    padding: 9px 7px 7px;
+  }
+  .estate-label h1 {
+    font-size: 49px;
+  }
+  .estate-label h1 > span {
+    font-size: 20px;
+  }
+  .estate-label p {
+    margin-block: 17px;
+  }
+  .stage-dust i {
+    opacity: 0.1;
+  }
+}
+@media (max-width: 360px) {
+  .cantina-experience {
+    --camera-scale: 0.8;
+  }
+  .camera-close {
+    --camera-scale: 0.83;
+  }
+  .bottle-swipe-edge {
+    width: 16px;
+  }
+  .edge-left {
+    right: calc(50% + 129px);
+  }
+  .edge-right {
+    left: calc(50% + 129px);
+  }
+  .camera-close .edge-left {
+    right: calc(50% + 133px);
+  }
+  .camera-close .edge-right {
+    left: calc(50% + 133px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bottle-camera {
+    transition: none;
+  }
+  .bottle-theatre *,
+  .bottle-theatre *:before,
+  .bottle-theatre *:after {
+    animation: none !important;
+  }
+}

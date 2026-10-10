@@ -23,7 +23,9 @@ export type Intelligence = {
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const response = await fetch(`/api/${path}`, {
     ...options,
-    signal: AbortSignal.timeout(20000),
+    signal: options?.signal
+      ? AbortSignal.any([options.signal, AbortSignal.timeout(20000)])
+      : AbortSignal.timeout(20000),
   });
   const body = await response.json().catch(() => null);
   if (!response.ok)
@@ -35,9 +37,10 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
     throw new Error("The analysis service returned an invalid response.");
   return body as T;
 }
-export const predictWine = (measurements: Measurements) =>
+export const predictWine = (measurements: Measurements, signal?: AbortSignal) =>
   request<Prediction>("predict", {
     method: "POST",
+    signal,
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(measurements),
   });

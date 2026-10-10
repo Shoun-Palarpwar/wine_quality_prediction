@@ -87,7 +87,7 @@ export default function Outcome() {
                   <span key={row}>
                     {key.toUpperCase()}
                     <br />
-                    {value.toFixed(4)} / CRU–{row + 1}
+                    {value.toFixed(4)} / CNT–{row + 1}
                   </span>
                 ))}
               </div>
@@ -97,9 +97,7 @@ export default function Outcome() {
           <i />
           <i />
           <i />
-          <span>
-            CRU<span>.</span>AI
-          </span>
+          <span>Cantina</span>
         </div>
         <span className="eyebrow">PREDICTION SEQUENCE / IN PROGRESS</span>
         <h1>
@@ -246,7 +244,7 @@ export default function Outcome() {
           ))}
           <a
             className="button-primary w-full"
-            download={`cru-${result.id}.json`}
+            download={`cantina-${result.id}.json`}
             href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify(result, null, 2))}`}
           >
             Export analysis <Download size={16} />

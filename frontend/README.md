@@ -1,8 +1,8 @@
-# CRU.AI / Digital Sommelier Vault
+# Cantina / Digital Sommelier Vault
 
-A four-route, responsive React + TypeScript interface for the repository’s saved
+A six-route, responsive React + TypeScript interface for the repository’s saved
 wine-quality model. Visual language: obsidian, velvet maroon, crimson instrumentation,
-parchment typography, and muted gold. All bottle artwork is local SVG.
+parchment typography, and muted gold. Bottle artwork uses local SVG and CSS 3D geometry; no external assets are required.
 
 ## Start locally
 
@@ -27,7 +27,7 @@ pipeline first. Use the tested Python dependencies for serialized model compatib
 
 ```sh
 npm run build         # TypeScript checks + optimized production assets in dist/
-npm test              # Instrument schema, presets, and validation tests
+npm test              # Instrument schema, rotation, swipe, and cancellation tests
 npm run preview       # Inspect the built assets on port 4173; API still required
 ```
 
@@ -46,7 +46,7 @@ frontend/
 ├── public/favicon.svg
 └── src/
     ├── main.tsx                  React root, router, shared vault provider
-    ├── App.tsx                   Four routes, transitions, 404 handling
+    ├── App.tsx                   Six routes, transitions, 404 handling
     ├── components/
     │   ├── Shell.tsx             Responsive navigation, skip link, footer
     │   ├── BottleArtifact.tsx    Original vector bottle + orbital composition
@@ -57,13 +57,26 @@ frontend/
     │   ├── Cellar.tsx            / — ambient entry and scroll discovery
     │   ├── Lab.tsx               /lab — all 11 controls, filters, presets, reset
     │   ├── Outcome.tsx           /outcome — calculation, result, retry, export
-    │   └── Intelligence.tsx      /intelligence — actual dataset and test metrics
+    │   ├── Intelligence.tsx      /intelligence — actual dataset and test metrics
+    │   └── Immersive.tsx         /immersive — the rotating bottle experience
+    ├── immersive/
+    │   ├── BottleScene.tsx       Shared-axis glass geometry, camera, swipe zones
+    │   ├── LabelFrame.tsx        Scrollable paper label and accessible navigation
+    │   ├── EstateLabel.tsx       Bottle introduction
+    │   ├── CompositionLabel.tsx  Grouped controls, presets, validation
+    │   ├── FermentationLabel.tsx Brewing sequence and cancellation
+    │   ├── VintageLabel.tsx      Real score, probabilities, report export
+    │   ├── IntelligenceLabel.tsx Dataset metrics and selectable correlations
+    │   ├── useBottlePrediction.ts Request lifecycle, minimum delay, cancellation
+    │   └── bottleState.ts        Quarter turns, swipe intent, abortable timer
     ├── hooks/useAtmosphere.ts    Lenis RAF + scoped GSAP ScrollTrigger lifecycle
     ├── state/VaultContext.tsx    Measurements and latest result shared across pages
     ├── data/compounds.ts         Names, units, limits, steps, presets, validation
     ├── data/compounds.test.ts    Unit tests for the instrument schema
     ├── lib/api.ts               Typed HTTP contract, timeout, error handling
-    └── styles/index.css         Design system, responsive layouts, motion fallbacks
+    └── styles/
+        ├── index.css            Design system, responsive layouts, motion fallbacks
+        └── immersive.css        Glass geometry, label typography, cellar atmosphere
 
 ../wine_quality/api.py            Local HTTP adapter around the saved Python model
 ../tests/test_api.py              Real model/service consistency and validation tests
@@ -89,6 +102,27 @@ frontend/
 State lives in memory. Reloading loses the current composition/result and a direct
 visit to `/outcome` offers a route back to the lab. No measurement is persisted to disk
 or sent to an external service. Landing-page specimen callouts are labeled illustrative.
+
+## 04. Immersive experience
+
+`/immersive` preserves the existing lab and adds a single persistent, four-sided
+wine bottle. Label arrows and horizontal swipes on the glass edges rotate it in
+90-degree increments. Sliders do not trigger bottle swipes. The estate label leads
+to a grouped 11-feature composition, followed by the vintage report and dataset
+intelligence. All experience content is on the bottle; only site navigation remains
+outside it. Long reports scroll inside their label.
+
+Submitting a composition starts the real API request and an abortable 3.2-second
+fermentation sequence. Once both finish, the loading label slides upward and reveals
+the actual rating on the same face. Reduced-motion mode removes the theatrical
+delay. Cancellation, retries, navigation locks, and unmount cleanup prevent stale
+results. Editing retains measurements, including values from the original lab.
+
+Geometric planes rotate in sync around a shared vertical axis; the parent stays
+unrotated to preserve native control hit testing at quarter turns. Inactive faces
+are inert and hidden from assistive technology. The stage uses `overflow: clip` to
+prevent browser focus scrolling from shifting the bottle inside its scene. No WebGL
+runtime or additional asset dependency is needed.
 
 ## Honest result presentation
 
@@ -128,3 +162,30 @@ size, and keeps model files on the server. It is a local development adapter. Fo
 public deployment, serve `dist/` with SPA fallbacks and proxy `/api` to a hardened
 Python application server with appropriate request limits and operational monitoring.
 The static frontend alone cannot execute the Python model. No hosting was provisioned.
+
+## Behind Cantina / academic exhibit
+
+The fifth navigation tab opens `/behind`, a standalone research narrative that
+works without the Python API. It includes the project chronology, seven pipeline
+stages, five model approaches, training-CV versus held-out comparisons, metric
+switching, and a filterable gallery with a native keyboard-accessible image dialog.
+The page uses Framer Motion with reduced-motion support.
+
+- `src/pages/Behind.tsx`: narrative layout and interactive model explorer.
+- `src/behind/content.ts`: academic explanations and chronology.
+- `src/behind/ResultsGallery.tsx`: artifact filters and original-image viewer.
+- `src/behind/research.json`: report snapshot generated from local artifacts.
+- `src/styles/behind.css`: responsive editorial presentation.
+- `public/research/`: unmodified research plots, interface JPGs and archive plots.
+
+Refresh the snapshot after running the experiment:
+
+```sh
+python3 frontend/scripts/sync-research.py
+```
+
+The script reads `reports/tables`, `models/metadata.json`, `reports/figures`,
+`reports/interface` and `archive/original_run`. It publishes only image assets and
+summary data, never serialized estimators. Archive results are explicitly labeled
+historical. The checkout has no current `results/` directory; plots are PNGs and
+the two interface captures are JPGs, presented in their original formats.

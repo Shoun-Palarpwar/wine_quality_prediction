@@ -6,6 +6,8 @@ const navigation = [
   { to: "/", label: "The cellar", index: "01" },
   { to: "/lab", label: "Analysis lab", index: "02" },
   { to: "/intelligence", label: "Intelligence", index: "03" },
+  { to: "/immersive", label: "Immersive experience", index: "04" },
+  { to: "/behind", label: "Behind Cantina", index: "05" },
 ];
 export function Shell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -14,16 +16,16 @@ export function Shell({ children }: { children: ReactNode }) {
     setOpen(false);
   }, [pathname]);
   return (
-    <div className="vault-shell">
+    <div
+      className={`vault-shell ${pathname === "/immersive" ? "immersive-shell" : ""}`}
+    >
       <a href="#main" className="skip-link">
         Skip to content
       </a>
       <header className="site-header">
-        <Link to="/" className="brand" aria-label="CRU.AI home">
+        <Link to="/" className="brand" aria-label="Cantina home">
           <Wine size={23} strokeWidth={1.2} />
-          <span>
-            CRU<span className="brand-dot">.</span>AI
-          </span>
+          <span>Cantina</span>
           <span className="brand-divider" />
           <small>
             THE DIGITAL
@@ -73,7 +75,7 @@ export function Shell({ children }: { children: ReactNode }) {
       <main id="main">{children}</main>
       <footer className="site-footer">
         <Link to="/" className="footer-wordmark">
-          CRU.AI
+          Cantina
         </Link>
         <span>ESTATE INTUITION. MACHINE PRECISION.</span>
         <span className="footer-end">

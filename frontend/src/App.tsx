@@ -7,6 +7,8 @@ import Cellar from "./pages/Cellar";
 const Lab = lazy(() => import("./pages/Lab"));
 const Outcome = lazy(() => import("./pages/Outcome"));
 const Intelligence = lazy(() => import("./pages/Intelligence"));
+const Behind = lazy(() => import("./pages/Behind"));
+const Immersive = lazy(() => import("./pages/Immersive"));
 
 export default function App() {
   useAtmosphere();
@@ -34,6 +36,8 @@ export default function App() {
               <Route path="/lab" element={<Lab />} />
               <Route path="/outcome" element={<Outcome />} />
               <Route path="/intelligence" element={<Intelligence />} />
+              <Route path="/immersive" element={<Immersive />} />
+              <Route path="/behind" element={<Behind />} />
               <Route
                 path="*"
                 element={

@@ -1,0 +1,239 @@
+{
+  "models": [
+    {
+      "Model": "dummy",
+      "Accuracy": 0.4264705882352941,
+      "Weighted F1": 0.2550030321406913,
+      "Macro F1": 0.09965635738831614,
+      "Balanced accuracy": 0.16666666666666666,
+      "MAE": 0.7242647058823529,
+      "Within one point": 0.8602941176470589,
+      "Quadratic weighted kappa": 0.0,
+      "CV macro F1": 0.09926784285068031,
+      "CV standard deviation": 0.00039308021628942075
+    },
+    {
+      "Model": "baseline",
+      "Accuracy": 0.6066176470588235,
+      "Weighted F1": 0.5878636213843825,
+      "Macro F1": 0.28868517103811225,
+      "Balanced accuracy": 0.2888932020820516,
+      "MAE": 0.4264705882352941,
+      "Within one point": 0.9669117647058824,
+      "Quadratic weighted kappa": 0.5563237979306146,
+      "CV macro F1": 0.2705075322741277,
+      "CV standard deviation": 0.018237589656466317
+    },
+    {
+      "Model": "balanced",
+      "Accuracy": 0.5845588235294118,
+      "Weighted F1": 0.5797149441926741,
+      "Macro F1": 0.3240666966523164,
+      "Balanced accuracy": 0.3345573036195015,
+      "MAE": 0.46691176470588236,
+      "Within one point": 0.9522058823529411,
+      "Quadratic weighted kappa": 0.5799826894326854,
+      "CV macro F1": 0.30699144082244817,
+      "CV standard deviation": 0.04735230990716054
+    },
+    {
+      "Model": "regression",
+      "Accuracy": 0.6066176470588235,
+      "Weighted F1": 0.5894393877149288,
+      "Macro F1": 0.3126485280566467,
+      "Balanced accuracy": 0.3026079356243713,
+      "MAE": 0.41544117647058826,
+      "Within one point": 0.9779411764705882,
+      "Quadratic weighted kappa": 0.5796033433898808,
+      "CV macro F1": 0.28896634913280783,
+      "CV standard deviation": 0.011277158976237645
+    },
+    {
+      "Model": "tuned",
+      "Accuracy": 0.6029411764705882,
+      "Weighted F1": 0.5985419808949222,
+      "Macro F1": 0.33321462488129155,
+      "Balanced accuracy": 0.3455966366859051,
+      "MAE": 0.4522058823529412,
+      "Within one point": 0.9485294117647058,
+      "Quadratic weighted kappa": 0.5892279512062044,
+      "CV macro F1": 0.32045086935493,
+      "CV standard deviation": 0.059801735208708365
+    }
+  ],
+  "summary": {
+    "raw_rows": 1599,
+    "clean_rows": 1359,
+    "duplicates_removed": 240,
+    "quality_counts": {
+      "3": 10,
+      "4": 53,
+      "5": 577,
+      "6": 535,
+      "7": 167,
+      "8": 17
+    }
+  },
+  "metadata": {
+    "selected_model": "tuned",
+    "selection_metric": "5-fold CV macro F1",
+    "features": [
+      "fixed acidity",
+      "volatile acidity",
+      "citric acid",
+      "residual sugar",
+      "chlorides",
+      "free sulfur dioxide",
+      "total sulfur dioxide",
+      "density",
+      "pH",
+      "sulphates",
+      "alcohol"
+    ],
+    "labels": [3, 4, 5, 6, 7, 8],
+    "random_seed": 42,
+    "sklearn_version": "1.9.0",
+    "training_rows": 1087,
+    "note": "CV selection scores are not unbiased generalization estimates; see held-out evaluation."
+  },
+  "parameters": {
+    "class_weight": "balanced",
+    "max_depth": "",
+    "min_samples_leaf": "1",
+    "n_estimators": "400"
+  },
+  "assets": [
+    {
+      "src": "/research/research-balanced_confusion_matrix.png",
+      "name": "balanced confusion matrix",
+      "category": "Research",
+      "source": "reports/figures/balanced_confusion_matrix.png"
+    },
+    {
+      "src": "/research/research-balanced_feature_importance.png",
+      "name": "balanced feature importance",
+      "category": "Research",
+      "source": "reports/figures/balanced_feature_importance.png"
+    },
+    {
+      "src": "/research/research-baseline_confusion_matrix.png",
+      "name": "baseline confusion matrix",
+      "category": "Research",
+      "source": "reports/figures/baseline_confusion_matrix.png"
+    },
+    {
+      "src": "/research/research-baseline_feature_importance.png",
+      "name": "baseline feature importance",
+      "category": "Research",
+      "source": "reports/figures/baseline_feature_importance.png"
+    },
+    {
+      "src": "/research/research-dummy_confusion_matrix.png",
+      "name": "dummy confusion matrix",
+      "category": "Research",
+      "source": "reports/figures/dummy_confusion_matrix.png"
+    },
+    {
+      "src": "/research/research-eda_correlation.png",
+      "name": "eda correlation",
+      "category": "Research",
+      "source": "reports/figures/eda_correlation.png"
+    },
+    {
+      "src": "/research/research-eda_feature_distributions.png",
+      "name": "eda feature distributions",
+      "category": "Research",
+      "source": "reports/figures/eda_feature_distributions.png"
+    },
+    {
+      "src": "/research/research-eda_quality_distribution.png",
+      "name": "eda quality distribution",
+      "category": "Research",
+      "source": "reports/figures/eda_quality_distribution.png"
+    },
+    {
+      "src": "/research/research-eda_top_features_vs_quality.png",
+      "name": "eda top features vs quality",
+      "category": "Research",
+      "source": "reports/figures/eda_top_features_vs_quality.png"
+    },
+    {
+      "src": "/research/research-regression_confusion_matrix.png",
+      "name": "regression confusion matrix",
+      "category": "Research",
+      "source": "reports/figures/regression_confusion_matrix.png"
+    },
+    {
+      "src": "/research/research-regression_feature_importance.png",
+      "name": "regression feature importance",
+      "category": "Research",
+      "source": "reports/figures/regression_feature_importance.png"
+    },
+    {
+      "src": "/research/research-tuned_confusion_matrix.png",
+      "name": "tuned confusion matrix",
+      "category": "Research",
+      "source": "reports/figures/tuned_confusion_matrix.png"
+    },
+    {
+      "src": "/research/research-tuned_feature_importance.png",
+      "name": "tuned feature importance",
+      "category": "Research",
+      "source": "reports/figures/tuned_feature_importance.png"
+    },
+    {
+      "src": "/research/interface-cru-cellar-desktop.jpg",
+      "name": "cru cellar desktop",
+      "category": "Interface",
+      "source": "reports/interface/cru-cellar-desktop.jpg"
+    },
+    {
+      "src": "/research/interface-cru-cellar.jpg",
+      "name": "cru cellar",
+      "category": "Interface",
+      "source": "reports/interface/cru-cellar.jpg"
+    },
+    {
+      "src": "/research/archive-eda_correlation.png",
+      "name": "eda correlation",
+      "category": "Archive",
+      "source": "archive/original_run/eda_correlation.png"
+    },
+    {
+      "src": "/research/archive-eda_feature_distributions.png",
+      "name": "eda feature distributions",
+      "category": "Archive",
+      "source": "archive/original_run/eda_feature_distributions.png"
+    },
+    {
+      "src": "/research/archive-eda_quality_distribution.png",
+      "name": "eda quality distribution",
+      "category": "Archive",
+      "source": "archive/original_run/eda_quality_distribution.png"
+    },
+    {
+      "src": "/research/archive-eda_top_features_vs_quality.png",
+      "name": "eda top features vs quality",
+      "category": "Archive",
+      "source": "archive/original_run/eda_top_features_vs_quality.png"
+    },
+    {
+      "src": "/research/archive-eval_confusion_matrix.png",
+      "name": "eval confusion matrix",
+      "category": "Archive",
+      "source": "archive/original_run/eval_confusion_matrix.png"
+    },
+    {
+      "src": "/research/archive-eval_feature_importance.png",
+      "name": "eval feature importance",
+      "category": "Archive",
+      "source": "archive/original_run/eval_feature_importance.png"
+    },
+    {
+      "src": "/research/archive-eval_per_class_metrics.png",
+      "name": "eval per class metrics",
+      "category": "Archive",
+      "source": "archive/original_run/eval_per_class_metrics.png"
+    }
+  ]
+}

@@ -134,7 +134,7 @@ export function BottleArtifact({ compact = false }: { compact?: boolean }) {
             fontFamily="Georgia,serif"
             fill="#351b1c"
           >
-            CRU.AI
+            Cantina
           </text>
           <text
             x="180"

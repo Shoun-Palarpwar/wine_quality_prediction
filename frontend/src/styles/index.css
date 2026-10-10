@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* CRU.AI visual system: parchment type, obsidian surfaces, restrained wine light. */
+/* Cantina visual system: parchment type, obsidian surfaces, restrained wine light. */
 :root {
   font-family: Arial, Helvetica, sans-serif;
   color: #f1e8da;
@@ -2486,5 +2486,49 @@ main,
   }
   .artifact-scan {
     transform: none;
+  }
+}
+
+/* Four-tab navigation spacing, independent of lazy page CSS. */
+@media (min-width: 1151px) and (max-width: 1350px) {
+  .site-header {
+    gap: 18px;
+  }
+  .desktop-nav {
+    gap: 20px;
+  }
+  .header-actions .status-label {
+    display: none;
+  }
+}
+@media (min-width: 701px) and (max-width: 1000px) {
+  .brand-divider,
+  .brand small {
+    display: none;
+  }
+  .desktop-nav {
+    gap: 18px;
+  }
+  .desktop-nav a {
+    font-size: 9px;
+  }
+}
+
+/* Five destinations: retain readable navigation before switching to the menu. */
+@media (min-width: 701px) {
+  .desktop-nav {
+    gap: 20px;
+  }
+  .header-actions {
+    display: none;
+  }
+}
+@media (min-width: 701px) and (max-width: 1050px) {
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-menu {
+    display: flex;
+    margin-left: auto;
   }
 }

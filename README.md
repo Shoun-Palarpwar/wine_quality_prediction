@@ -1,8 +1,8 @@
 # Red wine quality prediction
 
-## CRU.AI interactive interface
+## Cantina interactive interface
 
-The four-page Digital Sommelier Vault is in [`frontend/`](frontend/README.md).
+The Cantina Digital Sommelier Vault is in [`frontend/`](frontend/README.md).
 It includes the cellar entry, eleven-input analysis lab, actual model prediction
 reveal, and a dataset intelligence hub. Start `python3 -m wine_quality.api` from
 this directory, then `npm ci && npm run dev` from `frontend/`.
@@ -110,3 +110,11 @@ for the current workflow. Old artifacts are preserved but are not loaded by the 
 Dataset attribution: P. Cortez, A. Cerdeira, F. Almeida, T. Matos, and J. Reis (2009),
 UCI Wine Quality, red-wine subset. The original project supplied a local CSV and
 described obtaining it via a public GitHub mirror; the exact mirror was not recorded.
+
+### Cantina immersive bottle
+
+The frontend now includes **04. Immersive experience** at `/immersive`, alongside
+the existing cellar, lab, outcome, and intelligence routes. One CSS 3D wine bottle
+rotates through an introduction, editable chemistry, real prediction reveal and
+report, and dataset intelligence. See [frontend documentation](frontend/README.md)
+for the modular architecture, motion behavior, and local startup commands.

@@ -1,4 +1,4 @@
-"""Local, read-only model API for the CRU.AI frontend.
+"""Local, read-only model API for the Cantina frontend.
 
 Run `python -m wine_quality.api`. The Vite proxy keeps browser requests same-origin.
 This binds to loopback by default and is a development adapter, not a public server.
@@ -109,7 +109,7 @@ def main():
     parser.add_argument("--port", type=int, default=8000)
     args = parser.parse_args()
     server = ThreadingHTTPServer(("127.0.0.1", args.port), make_handler(ModelService()))
-    print(f"CRU.AI model API: http://127.0.0.1:{args.port}", flush=True)
+    print(f"Cantina model API: http://127.0.0.1:{args.port}", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

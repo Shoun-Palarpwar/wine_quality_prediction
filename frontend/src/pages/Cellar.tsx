@@ -21,7 +21,7 @@ export default function Cellar() {
           41°09′ N / 08°37′ W<span>VINHO VERDE · PORTUGAL</span>
         </div>
         <div className="hero-coordinate coordinate-right">
-          BATCH / CRU–001<span>RED WINE RESEARCH COLLECTION</span>
+          BATCH / CNT–001<span>RED WINE RESEARCH COLLECTION</span>
         </div>
         <div className="hero-copy">
           <div className="eyebrow">
